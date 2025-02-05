@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <magnoliaBundleVersion>6.3.4</magnoliaBundleVersion>
+        <magnoliaBundleVersion>6.2.50</magnoliaBundleVersion>
         <javaVersion>17</javaVersion>
     </properties>
 
