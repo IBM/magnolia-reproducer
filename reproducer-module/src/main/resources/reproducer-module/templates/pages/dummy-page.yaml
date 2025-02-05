@@ -1,0 +1,10 @@
+templateScript: /reproducer-module/templates/pages/dummy-page.ftl
+renderType: freemarker
+visible: true
+dialog: reproducer-module:pages/dummy-page-properties
+areas:
+  main:
+    renderType: freemarker
+    availableComponents:
+      dummy-component:
+        id: reproducer-module:components/dummy-component
