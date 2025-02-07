@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.ibmix.magkit.test.server.MagnoliaConfigSelector;
+import de.ibmix.magkit.test.server.MagnoliaConfigurer;
 import de.ibmix.magkit.test.server.MagnoliaTomcatExtension;
 import de.ibmix.magnolia.reproducermodule.CustomAuditLoggingManager;
 import info.magnolia.audit.AuditLoggingManager;
@@ -32,6 +33,7 @@ import info.magnolia.context.SystemContext;
 import info.magnolia.jcr.util.PropertyUtil;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.repository.RepositoryConstants;
+import java.util.Map;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
 import javax.jcr.Property;
@@ -45,7 +47,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @TestInstance(Lifecycle.PER_CLASS)
 @MagnoliaConfigSelector(magnoliaInstanceType = "author")
 @ExtendWith(MagnoliaTomcatExtension.class)
-public class AuthorTomcatTest {
+public class AuthorTomcatTest implements MagnoliaConfigurer {
+
+    @Override
+    public Map<String, String> getSystemPropsToSet() {
+        // same as in /reproducer-webapp/src/main/webapp/WEB-INF/config/shared/magnolia.properties
+        return Map.of("log4j.config", "WEB-INF/config/reproducer-log4j2.xml");
+    }
 
     /**
      * Verify our config in magkit-test-server/src/main/resources/magkit-test-server/config.server.auditLogging.yaml
