@@ -29,7 +29,7 @@ To run the Docker image, issue:
 podman run -it -p 8080:8080 magnolia-reproducer
 ```
 
-### As integration test in Maven
+#### As integration test in Maven
 To run the `AuthorTomcatTest` as a Maven integration-test:
 
 ```
