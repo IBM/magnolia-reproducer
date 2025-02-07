@@ -33,5 +33,5 @@ podman run -it -p 8080:8080 magnolia-reproducer
 To run the `AuthorTomcatTest` as a Maven integration-test:
 
 ```
-mvn --settings <your-magnolia-mvn-settings> package
+mvn --settings <your-magnolia-mvn-settings> verify
 ```
