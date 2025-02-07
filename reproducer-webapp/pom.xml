@@ -22,24 +22,23 @@
         <!-- option i - magnolia-empty-webapp -->
         <!-- Dependencies versions are already imported by parent pom. Requires "Option A" in the parent
             pom. -->
-        <dependency>
-            <groupId>info.magnolia</groupId>
-            <artifactId>magnolia-empty-webapp</artifactId>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>info.magnolia</groupId>
-            <artifactId>magnolia-empty-webapp</artifactId>
-            <type>pom</type>
-        </dependency>
-
+        <!-- <dependency> <groupId>info.magnolia</groupId> <artifactId>magnolia-empty-webapp</artifactId>
+            <type>war</type> </dependency> <dependency> <groupId>info.magnolia</groupId> <artifactId>magnolia-empty-webapp</artifactId>
+            <type>pom</type> </dependency> -->
 
         <!-- option ii - magnolia-community-webapp -->
         <!-- Dependencies versions are already imported by parent pom. Requires "Option A" in the parent
             pom. -->
-        <!-- <dependency> <groupId>info.magnolia.bundle</groupId> <artifactId>magnolia-community-webapp</artifactId>
-            <type>war</type> </dependency> <dependency> <groupId>info.magnolia.bundle</groupId> <artifactId>magnolia-community-webapp</artifactId>
-            <type>pom</type> </dependency> -->
+        <dependency>
+            <groupId>info.magnolia.bundle</groupId>
+            <artifactId>magnolia-community-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>info.magnolia.bundle</groupId>
+            <artifactId>magnolia-community-webapp</artifactId>
+            <type>pom</type>
+        </dependency>
 
 
         <!-- option iii - magnolia-dx-core-webapp -->
@@ -121,26 +120,25 @@
                             <!-- <argLine>-agentpath:$REBEL_HOME/lib/libjrebel64.dylib</argLine> -->
                         </configuration>
                     </execution>
-                  <execution>
-                    <id>integration-tests</id>
-                    <phase>integration-test</phase>
-                    <goals>
-                      <goal>test</goal>
-                    </goals>
-                    <configuration>
-                      <!-- Never skip running the tests when the integration-test phase
-                          is invoked -->
-                      <skip>false</skip>
-                      <includes>
-                        <!-- Include integration tests within integration-test phase. -->
-                        <include>**/*Tomcat*Test.java</include>
-                      </includes>
-                      <systemPropertyVariables>
-                          <!-- tell TomcatTest about the name of the WAR file -->
-                          <project.build.finalName>${project.build.finalName}</project.build.finalName>
-                      </systemPropertyVariables>
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <id>integration-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Never skip running the tests when the integration-test phase is invoked -->
+                            <skip>false</skip>
+                            <includes>
+                                <!-- Include integration tests within integration-test phase. -->
+                                <include>**/*Tomcat*Test.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <!-- tell TomcatTest about the name of the WAR file -->
+                                <project.build.finalName>${project.build.finalName}</project.build.finalName>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
