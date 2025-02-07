@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Magnolia Installation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="magnolia-icons.css">
+</head>
+
+<body>
+<div class="flexWrapper">
+    <header class="sticky-container">
+        <div class="header">
+            <div class="logo">
+                <object type="image/svg+xml" data="images/logo-magnolia.svg"></object>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header">
+                <h1><span class="icon icon-pulse"></span> Welcome to Magnolia</h1>
+                <h2>Congratulations!</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container">
+            <p>You have successfully set up your Magnolia bundle.</p>
+            <section>
+                <h2>Conclude the installation</h2>
+                <p>If you haven't already done so, please:</p>
+                <ul>
+                    <li><a href="/magnoliaAuthor/.magnolia/admincentral" target="_blank"><span class="icon icon-marker"></span>Run the Web update on the author instance</a></li>
+                    <li><a href="/magnoliaPublic/.magnolia/admincentral" target="_blank"><span class="icon icon-marker"></span>Run the Web update on the public instance</a></li>
+                </ul>
+                <p class="textbox">This is only necessary once after the initial setup and again whenever you install a new module or update an existing one. Magnolia will auto-detect, if a Web update has to be run when you attempt to log in. Running it ensures that all modules shipping
+                    with Magnolia or installed at a later point in time are properly configured.</p>
+            </section>
+            <section>
+
+                <h2>The standard set up</h2>
+
+                <p class="instances">In a typical set up, Magnolia is installed with two web applications: the author instance and the public instance.</p>
+                <div class="instances">
+                    <div class="instance author">
+                        <h4><span class="icon icon-author-instance"></span> Author instance</h4>
+                        <p>The Magnolia authoring instance is used for editing content. Administrators and editors have to login to this instance's Admin Central for configuring Magnolia and for adding or modifying pages.</p>
+                        <ul class="links">
+                            <li><a href="/magnoliaAuthor/.magnolia/admincentral" target="_blank"><span class="icon icon-marker"></span>Login to the Admin Central</a> <span class="icon icon-external-webpage"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="instance public">
+                        <h4><span class="icon icon-public-instance"></span> Public instance</h4>
+                        <p>The Magnolia public instance is accessed by your website visitors. It is not accessed by editors directly but administrators are able to login and configure this instance as well.</p>
+                        <ul class="links">
+                            <li><a href="/magnoliaPublic/" target="_blank"><span class="icon icon-marker"></span>Visit the published website</a> <span class="icon icon-external-webpage"></span>
+                            </li>
+                            <li><a href="/magnoliaPublic/.magnolia/admincentral" target="_blank"><span class="icon icon-marker"></span>Login to the Admin Central</a> <span class="icon icon-external-webpage"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <br style="clear: both;"/>
+            <p class="more-info">Note: the default username/password combination is superuser/superuser.<br>
+                For more information, please refer to the <a href="https://documentation.magnolia-cms.com/" target="_blank">Magnolia documentation</a> <span class="icon icon-from-fs"></span>
+            </p>
+            <br/>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span class="trademark">Magnolia is a registered trademark of Magnolia International Ltd.</span>
+        <span class="copyright">&copy;</span> Copyright 2003-<script>document.write(new Date().getFullYear())</script>
+        <a href="https://www.magnolia-cms.com" target="_blank">Magnolia International Ltd.</a>
+    </footer>
+</div>
+</body>
+</html>
