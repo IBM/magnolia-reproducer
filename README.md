@@ -11,7 +11,7 @@ Build results in a webapp that can be deployed e.g. to Tomcat.
 From the top-level Maven project:
 
 ```
-mvn --settings <your-magnolia-mvn-settings> package
+mvn package
 ```
 
 This results in a WAR file + exploded WAR folder in `reproducer-webapp/target`.
@@ -34,5 +34,5 @@ podman run -it -p 8080:8080 magnolia-reproducer
 To run the `AuthorTomcatTest` as a Maven integration-test:
 
 ```
-mvn --settings <your-magnolia-mvn-settings> verify
+mvn verify
 ```
