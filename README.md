@@ -2,7 +2,7 @@
 
 Make Magnolia bugs reproducable for Magnolia support, with as little project code as possible
 
-Generated from [Magnolia's project and module archetypes](https://docs.magnolia-cms.com/product-docs/6.3/developing/development-how-tos/how-to-use-magnolia-maven-archetypes/), and then added a JUnit5 integration-test with [IBM iX' MagnoliaTomcatExtension](https://github.com/IBM/magkit-test/tree/main/magkit-test-server#using-the-junit5-extension).
+Generated from [Magnolia's project and module archetypes](https://docs.magnolia-cms.com/product-docs/6.3/developing/development-how-tos/how-to-use-magnolia-maven-archetypes/), with Magnolia Community Edition used in the POM, and then added a JUnit5 integration-test with [IBM iX' MagnoliaTomcatExtension](https://github.com/IBM/magkit-test/tree/main/magkit-test-server#using-the-junit5-extension).
 
 That test is supposed to make Magnolia bugs reproducable for Magnolia support, with as little project code as possible.
 
@@ -30,6 +30,7 @@ To run the Docker image, issue:
 ```
 podman run -it -p 8080:8080 magnolia-reproducer
 ```
+This only runs the webapp as Docker/OCI image, without running any tests.
 
 ### As integration test in Maven
 To run the `AuthorTomcatTest` as a Maven integration-test:
@@ -37,3 +38,9 @@ To run the `AuthorTomcatTest` as a Maven integration-test:
 ```
 mvn verify
 ```
+### As JUnit test in an IDE
+[IBM iX' MagnoliaTomcatExtension](https://github.com/IBM/magkit-test/tree/main/magkit-test-server#using-the-junit5-extension) expects the name of the WAR to be passed in using the system property `project.build.finalName`. This is what the webapp's POM does in [./reproducer-webapp/pom.xml](./reproducer-webapp/pom.xml#L138), using the value of the Maven pre-defined variable.
+
+E.g. in Eclipse, this can be done by passing `-Dproject.build.finalName=reproducer-webapp-1.0-SNAPSHOT` as a VM argument:
+
+<img src="./doc-images/eclipse-launch-config.png" width="800" alt="Eclipse run configuration">
