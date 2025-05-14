@@ -35,7 +35,15 @@ import org.slf4j.LoggerFactory;
 import info.magnolia.audit.AuditLoggingManager;
 import info.magnolia.audit.LogConfiguration;
 import info.magnolia.audit.LoggingLevel;
+import info.magnolia.event.EventBus;
+import info.magnolia.event.SystemEventBus;
+import info.magnolia.module.ModuleRegistry;
+import info.magnolia.module.ModulesStartedEvent;
+import info.magnolia.module.StartModuleEvent;
 import info.magnolia.objectfactory.Components;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class CustomAuditLoggingManager extends AuditLoggingManager {
 	
@@ -55,6 +63,14 @@ public class CustomAuditLoggingManager extends AuditLoggingManager {
             applog.info("Class CustomAuditLoggingManager not defined");
             return null;
         }
+    }
+
+    @Inject
+    CustomAuditLoggingManager(@Named(SystemEventBus.NAME) EventBus eventBus, ModuleRegistry moduleRegistry) {
+        eventBus.addHandler(ModulesStartedEvent.class, event -> {
+            ReproducerModule reproducerModule = moduleRegistry.getModuleInstance(ReproducerModule.class); //something to read from the module maybe?
+            postModuleStart();
+        });
     }
     
     @Override
