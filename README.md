@@ -41,6 +41,23 @@ mvn verify
 ### As JUnit test in an IDE
 [IBM iX' MagnoliaTomcatExtension](https://github.com/IBM/magkit-test/tree/main/magkit-test-server#using-the-junit5-extension) expects the name of the WAR to be passed in using the system property `project.build.finalName`. This is what the webapp's POM does in [./reproducer-webapp/pom.xml](./reproducer-webapp/pom.xml#L138), using the value of the Maven pre-defined variable.
 
+#### In Eclipse
 E.g. in Eclipse, this can be done by passing `-Dproject.build.finalName=reproducer-webapp-1.0-SNAPSHOT` as a VM argument:
 
 <img src="./doc-images/eclipse-launch-config.png" width="800" alt="Eclipse run configuration">
+
+#### In VSCode
+In VSCode, add the following to your `settings.json`:
+
+```
+    "java.test.config": [
+        {
+            "name": "AuthorTomcatTestConfig",
+            "workingDirectory": "${workspaceFolder}/reproducer-webapp",
+            "vmArgs": [
+                "-Dlog4j.config=WEB-INF/config/reproducer-log4j2.xml",  
+                "-Dproject.build.finalName=reproducer-webapp-1.0-SNAPSHOT"
+            ],
+        }        
+    ]
+```    
