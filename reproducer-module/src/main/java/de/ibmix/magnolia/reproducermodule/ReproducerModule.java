@@ -16,8 +16,9 @@ public class ReproducerModule implements ModuleLifecycle{
 
     @Override
     public void start(final ModuleLifecycleContext moduleLifecycleContext) {
-        CustomAuditLoggingManager customAuditLoggingManager = (CustomAuditLoggingManager) Components.getComponent(AuditLoggingManager.class);
-        customAuditLoggingManager.postModuleStart();
+        //CustomAuditLoggingManager customAuditLoggingManager = (CustomAuditLoggingManager) Components.getComponent(AuditLoggingManager.class);
+        AuditLoggingManager customAuditLoggingManager = Components.getComponent(AuditLoggingManager.class);
+        //customAuditLoggingManager.postModuleStart();
         if (!"test".equals(customAuditLoggingManager.getLogConfiguration("deactivate").getLogName())) {
             throw new RuntimeException("customAuditLoggingManager was not configured from repo");
         }

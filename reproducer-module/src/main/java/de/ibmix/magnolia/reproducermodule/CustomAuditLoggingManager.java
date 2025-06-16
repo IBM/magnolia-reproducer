@@ -1,5 +1,14 @@
 package de.ibmix.magnolia.reproducermodule;
 
+import info.magnolia.audit.AuditLoggingManager;
+import info.magnolia.audit.LogConfiguration;
+import info.magnolia.audit.LoggingLevel;
+import info.magnolia.event.EventBus;
+import info.magnolia.event.SystemEventBus;
+import info.magnolia.module.ModuleRegistry;
+import info.magnolia.module.ModulesStartedEvent;
+import info.magnolia.objectfactory.Components;
+
 /*-
  * #%L
  * magkit-test-server Maven Module
@@ -26,20 +35,26 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import info.magnolia.audit.AuditLoggingManager;
-import info.magnolia.audit.LogConfiguration;
-import info.magnolia.audit.LoggingLevel;
-import info.magnolia.objectfactory.Components;
-
 public class CustomAuditLoggingManager extends AuditLoggingManager {
 	
 	private List<LogConfiguration> logConfigurations = new ArrayList<LogConfiguration>();
+	
+
+    @Inject
+    CustomAuditLoggingManager(@Named(SystemEventBus.NAME) EventBus eventBus, ModuleRegistry moduleRegistry) {
+        eventBus.addHandler(ModulesStartedEvent.class, event -> {
+            ReproducerModule reproducerModule = moduleRegistry.getModuleInstance(ReproducerModule.class); //something to read from the module maybe?
+            postModuleStart();
+        });
+    }	
+	
 
     private Set<String> excludeWorkspaces = new HashSet<>(Arrays.asList("userranking", "messages", "tasks"));
 
