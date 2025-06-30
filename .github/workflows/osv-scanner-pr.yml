@@ -6,6 +6,7 @@ on:
     branches: [main]
   merge_group:
     branches: [main]
+  workflow_dispatch: # This line enables manual triggering    
 
 permissions:
   # Required to upload SARIF file to CodeQL. See: https://github.com/github/codeql-action/issues/2117
