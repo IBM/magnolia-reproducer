@@ -41,6 +41,15 @@ mvn verify
 ### As JUnit test in an IDE
 [IBM iX' MagnoliaTomcatExtension](https://github.com/IBM/magkit-test/tree/main/magkit-test-server#using-the-junit5-extension) expects the name of the WAR to be passed in using the system property `project.build.finalName`. This is what the webapp's POM does in [./reproducer-webapp/pom.xml](./reproducer-webapp/pom.xml#L138), using the value of the Maven pre-defined variable.
 
+You can find out the expected value like this:
+
+```
+mvn help:evaluate -Dexpression=project.build.finalName
+````
+
+In this project, the system property `project.build.finalName` is defined here (as the MagnoliaTomcatExtension cannot read Maven variables): https://github.com/IBM/magnolia-reproducer/blob/main/reproducer-webapp/pom.xml#L138 
+
+
 #### In Eclipse
 E.g. in Eclipse, this can be done by passing `-Dproject.build.finalName=reproducer-webapp-1.0-SNAPSHOT` as a VM argument:
 
