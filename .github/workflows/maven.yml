@@ -14,6 +14,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  # make openSSF Token-Permissions check happy
+  # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#defining-access-for-the-github_token-scopes
+  # says "If you specify the access for any of these permissions, all of those that are not specified are set to none."
+  # i.e. setting "contents: read" will set all other permissions to "none"
+  contents: read
+
 jobs:
   build:
 
