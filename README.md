@@ -1,3 +1,5 @@
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/IBM/magnolia-reproducer/badge)](https://scorecard.dev/viewer/?uri=github.com/IBM/magnolia-reproducer)
+
 # magnolia-reproducer
 
 Make Magnolia bugs reproducable for Magnolia support, with as little project code as possible
