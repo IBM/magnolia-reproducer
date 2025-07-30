@@ -1,0 +1,1 @@
+file exists only to be able to trigger Github workflows with a commit, e.g. scorecard when project settings in Github were changed
