@@ -8,16 +8,6 @@
   <versionHandler>de.ibmix.magnolia.reproducermodule.setup.ReproducerModuleVersionHandler</versionHandler>
   <version>${project.version}</version>
 
-  <!-- For more information on module descriptor configuration options -->
-  <!-- https://documentation.magnolia-cms.com/display/DOCS/XML-based+module+descriptor -->
-    <components>
-        <id>main</id>
-        <type-mapping>
-            <type>info.magnolia.audit.AuditLoggingManager</type>
-            <implementation>de.ibmix.magnolia.reproducermodule.CustomAuditLoggingManager</implementation>
-        </type-mapping>
-    </components>
-
   <dependencies>
     <dependency>
       <name>core</name>

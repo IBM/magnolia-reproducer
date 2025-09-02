@@ -1,0 +1,50 @@
+'logConfigurations':
+  'jcr:primaryType': 'mgnl:content'
+  'deactivate':
+    'active': 'true'
+    'logName': 'test'
+    'sendEvents': 'true'
+  'activate':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'unpublish':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'publish':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'copy':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'login':
+    'active': 'true'
+    'logName': 'log-access'
+    'sendEvents': 'true'
+  'logout':
+    'active': 'true'
+    'logName': 'log-access'
+    'sendEvents': 'true'
+  'move':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'modify':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'create':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'delete':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'
+  'security':
+    'active': 'true'
+    'logName': 'log-audit'
+    'sendEvents': 'true'

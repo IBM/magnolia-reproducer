@@ -1,9 +1,7 @@
 package de.ibmix.magnolia.reproducermodule;
 
-import info.magnolia.audit.AuditLoggingManager;
 import info.magnolia.module.ModuleLifecycle;
 import info.magnolia.module.ModuleLifecycleContext;
-import info.magnolia.objectfactory.Components;
 
 /**
  * This class is optional and represents the configuration for the reproducer-module module.
@@ -16,12 +14,7 @@ public class ReproducerModule implements ModuleLifecycle{
 
     @Override
     public void start(final ModuleLifecycleContext moduleLifecycleContext) {
-        CustomAuditLoggingManager customAuditLoggingManager = (CustomAuditLoggingManager) Components.getComponent(AuditLoggingManager.class);
-        customAuditLoggingManager.postModuleStart();
-        if (!"test".equals(customAuditLoggingManager.getLogConfiguration("deactivate").getLogName())) {
-            throw new RuntimeException("customAuditLoggingManager was not configured from repo");
-        }
-
+        // ignore
     }
 
     @Override
