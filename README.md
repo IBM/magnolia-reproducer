@@ -72,3 +72,10 @@ In VSCode, add the following to your `settings.json`:
         }        
     ]
 ```    
+
+
+## Magnolia DX Core on branch dx-core
+
+The main branch of the repo contains a Magnolia Community Edition project setup. If you need Magnolia DX Core dependencies then please checkout the `dx-core` branch of this repo.
+
+If you get `401 Unauthorized` errors when Maven tries to access the repo `magnolia.nexus.enterprise`, then please make sure you are using the exact same repo id in your Maven settings.xml where you provide the Magnolia Nexus user token + password (see also https://docs.magnolia-cms.com/product-docs/6.3/developing/development-environment/maven/#_set_up_credentials_in_maven_settings)
