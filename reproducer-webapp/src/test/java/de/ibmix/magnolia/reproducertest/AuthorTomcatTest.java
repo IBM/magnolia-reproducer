@@ -22,17 +22,20 @@ package de.ibmix.magnolia.reproducertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.ibmix.magkit.test.server.MagnoliaConfigSelector;
 import de.ibmix.magkit.test.server.MagnoliaConfigurer;
 import de.ibmix.magkit.test.server.MagnoliaTomcatExtension;
-import de.ibmix.magnolia.reproducermodule.CustomAuditLoggingManager;
 import info.magnolia.audit.AuditLoggingManager;
+import info.magnolia.audit.LogConfiguration;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.context.SystemContext;
 import info.magnolia.jcr.util.PropertyUtil;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.repository.RepositoryConstants;
+
+import java.util.List;
 import java.util.Map;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
@@ -56,14 +59,15 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
     }
 
     /**
-     * Verify our config in magkit-test-server/src/main/resources/magkit-test-server/config.server.auditLogging.yaml
-     * was bootstrapped and our custom class has replaced Magnolia's AuditLoggingManager as a component.
+     * Example of e.g. how to obtain a Magnolia component and test it:
+     * In our module, we are bootstrapping reproducer-module/src/main/resources/mgnl-bootstrap/reproducer-module/config.server.auditLogging.logConfigurations.yaml
+     * verify that all logConfigurations in the AuditLoggingManager object are now configured to send events.
      * @throws InterruptedException
      * @throws RepositoryException
      * @throws LoginException
      */
     @Test
-    public void testAuditLoggingConfig() throws InterruptedException, LoginException, RepositoryException {
+    public void testAuditLoggingConfig() throws LoginException, RepositoryException  {
         // verify our bootstrap config was really bootstrapped
         SystemContext systemContext = Components.getComponent(SystemContext.class);
         MgnlContext.setInstance(systemContext);
@@ -78,20 +82,14 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
 
         assertEquals("test", propertyOrNull.getString());
 
-        // obtain AuditLoggingManager and try to cast it to our class
-        CustomAuditLoggingManager customAuditLoggingManager;
-        // this fails with ClassCastException due to a Magnolia behavior that we want to reproduce, catch it for the moment
-        // so build doesn't fail on main branch
-        try {
-            // verify that our custom class is used instead of Magnolia's AuditLoggingManager
-            customAuditLoggingManager = (CustomAuditLoggingManager) Components.getComponent(AuditLoggingManager.class);
-            // verify bootstrapped configuration was properly set using node2bean in the actual Java object
-            assertEquals("test", customAuditLoggingManager.getLogConfiguration("deactivate").getLogName());
-        } catch (ClassCastException e) {
-            // this is expected, we want to verify that our custom class is used instead
-            // so we will verify it later
-            customAuditLoggingManager = null;
-        }
+        // obtain object from registry
+        AuditLoggingManager auditLoggingManager = Components.getComponent(AuditLoggingManager.class);
+        // verify bootstrapped configuration was properly set using node2bean in the actual Java object
+        List<LogConfiguration> logConfigurations = auditLoggingManager.getLogConfigurations();
+        assertEquals(12, logConfigurations.size());
+        for (LogConfiguration logConfiguration : logConfigurations) {
+            assertTrue(logConfiguration.isSendEvents());
+        }               
     }
 
 }

@@ -21,7 +21,7 @@ public class ReproducerModuleVersionHandler extends DefaultModuleVersionHandler 
     @Override
     protected List<Task> getStartupTasks(InstallContext installContext) {
         List<Task> startupTasks = new LinkedList<>(super.getStartupTasks(installContext));
-        startupTasks.add(new BootstrapSingleModuleResource("Bootstrap audit logging", "Configure CustomAuditLoggingManager", "config.server.auditLogging.yaml"));
+        startupTasks.add(new BootstrapSingleModuleResource("Bootstrap audit logging", "Configure logConfigurations' sendeEvent to active", "config.server.auditLogging.logConfigurations.yaml"));
         return startupTasks;
     }
 }
