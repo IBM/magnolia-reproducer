@@ -29,7 +29,7 @@
         <!-- option ii - magnolia-community-webapp -->
         <!-- Dependencies versions are already imported by parent pom. Requires "Option A" in the parent
             pom. -->
-        <dependency>
+        <!-- <dependency>
             <groupId>info.magnolia.bundle</groupId>
             <artifactId>magnolia-community-webapp</artifactId>
             <type>war</type>
@@ -38,15 +38,22 @@
             <groupId>info.magnolia.bundle</groupId>
             <artifactId>magnolia-community-webapp</artifactId>
             <type>pom</type>
-        </dependency>
+        </dependency> -->
 
 
         <!-- option iii - magnolia-dx-core-webapp -->
         <!-- Dependencies versions are already imported by parent pom. Requires "Option B" in the parent
             pom. -->
-        <!-- <dependency> <groupId>info.magnolia.dx</groupId> <artifactId>magnolia-dx-core-webapp</artifactId>
-            <type>war</type> </dependency> <dependency> <groupId>info.magnolia.dx</groupId> <artifactId>magnolia-dx-core-webapp</artifactId>
-            <type>pom</type> </dependency> -->
+        <dependency>
+            <groupId>info.magnolia.dx</groupId>
+            <artifactId>magnolia-dx-core-webapp</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>info.magnolia.dx</groupId>
+            <artifactId>magnolia-dx-core-webapp</artifactId>
+            <type>pom</type>
+        </dependency>
         <dependency>
             <artifactId>reproducer-module</artifactId>
             <groupId>de.ibmix.magnolia</groupId>
