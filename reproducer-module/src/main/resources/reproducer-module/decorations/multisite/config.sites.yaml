@@ -1,0 +1,26 @@
+"fallback":
+  "mappings":
+    "extends": "override"
+  "domains":
+    "extends": "override"
+  "i18n":
+    "class": "info.magnolia.cms.i18n.DefaultI18nContentSupport"
+    "enabled": "true"
+    "fallbackLocale": "en"
+    "locales":
+      "en":
+        "country": ""
+        "enabled": "true"
+        "language": "en"
+      "de":
+        "country": ""
+        "enabled": "true"
+        "language": "de"
+      "it":
+        "country": ""
+        "enabled": "true"
+        "language": "it"
+      "no":
+        "country": ""
+        "enabled": "true"
+        "language": "no"

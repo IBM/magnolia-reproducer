@@ -29,15 +29,22 @@ import de.ibmix.magkit.test.server.MagnoliaConfigurer;
 import de.ibmix.magkit.test.server.MagnoliaTomcatExtension;
 import info.magnolia.audit.AuditLoggingManager;
 import info.magnolia.audit.LogConfiguration;
+import info.magnolia.cms.i18n.I18nContentSupport;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.context.SystemContext;
 import info.magnolia.jcr.util.PropertyUtil;
+import info.magnolia.module.site.Site;
+import info.magnolia.module.site.SiteManager;
+import info.magnolia.module.site.theme.ThemeReference;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.repository.RepositoryConstants;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
 import javax.jcr.Property;
@@ -100,4 +107,38 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
         }               
     }
 
+
+    @Test
+    public void testSiteConfiguration() {
+        // verify config in /reproducer-module/src/main/resources/reproducer-module/decorations/multisite/config.sites.yaml works
+        SiteManager siteManager = Components.getComponent(SiteManager.class);
+        assertNotNull(siteManager);
+        // the default site is configured with name "fallback"
+        Site defaultSite = siteManager.getDefaultSite();
+        assertNotNull(defaultSite);
+
+        I18nContentSupport i18n = defaultSite.getI18n();
+        assertNotNull(i18n);
+        Map<String, Locale> locales = i18n.getLocales().stream().collect(Collectors.toMap(
+            Locale::toLanguageTag,
+            l -> l
+        ));
+        String[] expectedLanguages =
+            {
+                "en",
+                "de",
+                "it",
+                "no"
+            };
+        Arrays.stream(expectedLanguages).forEach(
+            l-> assertNotNull(locales.get(l))
+        );
+
+        assertNotNull(defaultSite.getDomains());
+        assertNotNull(defaultSite.getMappings());
+        assertNotNull(defaultSite.getTemplates());
+        ThemeReference theme = defaultSite.getTheme();
+        assertNotNull(theme);
+    }    
+    
 }

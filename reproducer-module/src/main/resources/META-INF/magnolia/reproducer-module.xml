@@ -19,5 +19,8 @@
       <version>0.7/*</version>
     </dependency>
     -->
+    <dependency>
+      <name>multisite</name>
+    </dependency>
   </dependencies>
 </module>
