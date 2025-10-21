@@ -34,7 +34,8 @@ import info.magnolia.context.SystemContext;
 import info.magnolia.jcr.util.PropertyUtil;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.repository.RepositoryConstants;
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import javax.jcr.LoginException;
@@ -52,10 +53,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(MagnoliaTomcatExtension.class)
 public class AuthorTomcatTest implements MagnoliaConfigurer {
 
+    private static final String MAGNOLIA_RESOURCES_DIR_CONFIG_PROP = "magnolia.resources.dir";
+    
     @Override
     public Map<String, String> getSystemPropsToSet() {
-        // same as in /reproducer-webapp/src/main/webapp/WEB-INF/config/shared/magnolia.properties
-        return Map.of("log4j.config", "WEB-INF/config/reproducer-log4j2.xml");
+        Path lightmodulesDir = Paths.get("").toAbsolutePath().resolve("./modules");
+        return Map.of(
+            // same as in /reproducer-webapp/src/main/webapp/WEB-INF/config/shared/magnolia.properties
+            "log4j.config", "WEB-INF/config/reproducer-log4j2.xml",
+            // tell Magnolia where to find the hello-magnolia lightmodule
+            MAGNOLIA_RESOURCES_DIR_CONFIG_PROP, lightmodulesDir.toAbsolutePath().toString()
+            );
     }
 
     /**

@@ -12,7 +12,7 @@
 
     <properties>
         <magnoliaBundleVersion>6.2.62</magnoliaBundleVersion>
-        <javaVersion>11</javaVersion>
+        <javaVersion>21</javaVersion>
     </properties>
 
 

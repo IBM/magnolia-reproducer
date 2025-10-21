@@ -30,8 +30,19 @@ podman build --build-arg SOURCE_WAR_EXPLODED=target/reproducer-webapp-1.0-SNAPSH
 To run the Docker image, issue:
 
 ```
-podman run -it -p 8080:8080 magnolia-reproducer
+sh ./start-reproducer.sh
 ```
+
+The shellscript runs the Magnolia container while mounting a sample lightmodule with a page template from Magnolia:
+
+```
+podman run -it \
+  -p 8080:8080 \
+  -v ./modules:/usr/local/tomcat/lightmodules:Z \
+  -e CATALINA_OPTS="-Dmagnolia.resources.dir=/usr/local/tomcat/lightmodules" \
+  magnolia-reproducer 
+```
+
 This only runs the webapp as Docker/OCI image, without running any tests.
 
 ### As integration test in Maven
@@ -72,3 +83,10 @@ In VSCode, add the following to your `settings.json`:
         }        
     ]
 ```    
+
+
+## Magnolia DX Core on branch dx-core
+
+The main branch of the repo contains a Magnolia Community Edition project setup. If you need Magnolia DX Core dependencies then please checkout the `dx-core` branch of this repo.
+
+If you get `401 Unauthorized` errors when Maven tries to access the repo `magnolia.nexus.enterprise`, then please make sure you are using the exact same repo id in your Maven settings.xml where you provide the Magnolia Nexus user token + password (see also https://docs.magnolia-cms.com/product-docs/6.3/developing/development-environment/maven/#_set_up_credentials_in_maven_settings)
