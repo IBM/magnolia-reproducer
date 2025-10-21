@@ -1,0 +1,1 @@
+Contains Magnolia's sample lightmodule taken from https://docs.magnolia-cms.com/product-docs/6.2/developing/magnolia-front-end-development/hello-magnolia-for-front-end-developers/

@@ -1,0 +1,4 @@
+templateScript: /hello-magnolia/templates/components/quotation.ftl
+renderType: freemarker
+dialog: hello-magnolia:components/quotation
+title: Quotation
