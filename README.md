@@ -30,8 +30,19 @@ podman build --build-arg SOURCE_WAR_EXPLODED=target/reproducer-webapp-1.0-SNAPSH
 To run the Docker image, issue:
 
 ```
-podman run -it -p 8080:8080 magnolia-reproducer
+sh ./start-reproducer.sh
 ```
+
+The shellscript runs the Magnolia container while mounting a sample lightmodule with a page template from Magnolia:
+
+```
+podman run -it \
+  -p 8080:8080 \
+  -v ./modules:/usr/local/tomcat/lightmodules:Z \
+  -e CATALINA_OPTS="-Dmagnolia.resources.dir=/usr/local/tomcat/lightmodules" \
+  magnolia-reproducer 
+```
+
 This only runs the webapp as Docker/OCI image, without running any tests.
 
 ### As integration test in Maven
