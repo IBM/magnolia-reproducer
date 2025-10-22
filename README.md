@@ -68,6 +68,8 @@ E.g. in Eclipse, this can be done by passing `-Dproject.build.finalName=reproduc
 
 <img src="./doc-images/eclipse-launch-config.png" width="800" alt="Eclipse run configuration">
 
+You can find a saved Eclipse launch configuration for the `AuthorTomcatTest` in `reproducer-webapp/.eclipse-launchconfigs`, which also contains VM parameters to avoid problems with the Java module system.
+
 #### In VSCode
 In VSCode, add the following to your `settings.json`:
 
