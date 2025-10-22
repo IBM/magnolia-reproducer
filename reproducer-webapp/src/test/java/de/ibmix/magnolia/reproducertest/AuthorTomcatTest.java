@@ -61,16 +61,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public class AuthorTomcatTest implements MagnoliaConfigurer {
 
     private static final String MAGNOLIA_RESOURCES_DIR_CONFIG_PROP = "magnolia.resources.dir";
-    
+
     @Override
     public Map<String, String> getSystemPropsToSet() {
         Path lightmodulesDir = Paths.get("").toAbsolutePath().resolve("./modules");
         return Map.of(
-            // same as in /reproducer-webapp/src/main/webapp/WEB-INF/config/shared/magnolia.properties
-            "log4j.config", "WEB-INF/config/reproducer-log4j2.xml",
+            // same as in
+            // /reproducer-webapp/src/main/webapp/WEB-INF/config/shared/magnolia.properties
+            "log4j.config",
+            "WEB-INF/config/reproducer-log4j2.xml",
             // tell Magnolia where to find the hello-magnolia lightmodule
-            MAGNOLIA_RESOURCES_DIR_CONFIG_PROP, lightmodulesDir.toAbsolutePath().toString()
-            );
+            MAGNOLIA_RESOURCES_DIR_CONFIG_PROP,
+            lightmodulesDir.toAbsolutePath().toString());
     }
 
     /**
@@ -82,7 +84,7 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
      * @throws LoginException
      */
     @Test
-    public void testAuditLoggingConfig() throws LoginException, RepositoryException  {
+    public void testAuditLoggingConfig() throws LoginException, RepositoryException {
         // verify our bootstrap config was really bootstrapped
         SystemContext systemContext = Components.getComponent(SystemContext.class);
         MgnlContext.setInstance(systemContext);
@@ -99,18 +101,20 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
 
         // obtain object from registry
         AuditLoggingManager auditLoggingManager = Components.getComponent(AuditLoggingManager.class);
-        // verify bootstrapped configuration was properly set using node2bean in the actual Java object
+        // verify bootstrapped configuration was properly set using node2bean in
+        // the actual Java object
         List<LogConfiguration> logConfigurations = auditLoggingManager.getLogConfigurations();
         assertEquals(12, logConfigurations.size());
         for (LogConfiguration logConfiguration : logConfigurations) {
             assertTrue(logConfiguration.isSendEvents());
-        }               
+        }
     }
-
 
     @Test
     public void testSiteConfiguration() {
-        // verify config in /reproducer-module/src/main/resources/reproducer-module/decorations/multisite/config.sites.yaml works
+        // verify config in
+        // /reproducer-module/src/main/resources/reproducer-module/decorations/multisite/config.sites.yaml
+        // works
         SiteManager siteManager = Components.getComponent(SiteManager.class);
         assertNotNull(siteManager);
         // the default site is configured with name "fallback"
@@ -119,10 +123,11 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
 
         I18nContentSupport i18n = defaultSite.getI18n();
         assertNotNull(i18n);
-        Map<String, Locale> locales = i18n.getLocales().stream().collect(Collectors.toMap(
-            Locale::toLanguageTag,
-            l -> l
-        ));
+        Map<String, Locale> locales =
+            i18n.getLocales().stream().collect(
+                Collectors.toMap(
+                    Locale::toLanguageTag,
+                    l -> l));
         String[] expectedLanguages =
             {
                 "en",
@@ -131,14 +136,26 @@ public class AuthorTomcatTest implements MagnoliaConfigurer {
                 "no"
             };
         Arrays.stream(expectedLanguages).forEach(
-            l-> assertNotNull(locales.get(l))
-        );
+            l -> assertNotNull(locales.get(l)));
 
         assertNotNull(defaultSite.getDomains());
         assertNotNull(defaultSite.getMappings());
         assertNotNull(defaultSite.getTemplates());
         ThemeReference theme = defaultSite.getTheme();
         assertNotNull(theme);
-    }    
-    
+    }
+
+    /**
+     * Verify our sample page was bootstrapped.
+     */
+    @Test
+    public void testSamplePageBootstrap() throws LoginException, RepositoryException {
+        // make sure
+        // /reproducer-module/src/main/resources/mgnl-bootstrap-samples/reproducer-module/website.Hello-Magnolia.yaml
+        // was bootstrapped
+        SystemContext systemContext = Components.getComponent(SystemContext.class);
+        MgnlContext.setInstance(systemContext);
+        assertTrue(systemContext.getJCRSession("website").nodeExists("/Hello-Magnolia"));
+    }
+
 }
